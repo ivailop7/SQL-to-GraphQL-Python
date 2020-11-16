@@ -1,0 +1,43 @@
+CREATE TABLE students(
+    id             INT PRIMARY KEY NOT NULL,
+    name           TEXT    NOT NULL,
+    age            INT     NOT NULL,
+    country        CHAR(50)
+);
+CREATE TABLE teachers(
+    id             INT PRIMARY KEY NOT NULL,
+    name           TEXT NOT NULL
+);
+CREATE TABLE classes(
+    id             INT PRIMARY KEY NOT NULL,
+    name           TEXT NOT NULL,
+    optional       INT NOT NULL,
+    teacher_id     INT NOT NULL,
+    FOREIGN KEY(teacher_id) REFERENCES teachers(id)
+);
+CREATE TABLE grades(
+    student_id     INT NOT NULL,
+    class_id       INT NOT NULL,
+    grade          REAL CHECK(grade > 0),
+    FOREIGN KEY(student_id) REFERENCES students(id),
+    FOREIGN KEY(class_id) REFERENCES classes(id)
+);
+
+INSERT INTO students (id, name, age, country) VALUES (1, "Adam", 27, "USA");
+INSERT INTO students (id, name, age, country) VALUES (2, "Alice", 25, "AUS");
+INSERT INTO students (id, name, age, country) VALUES (3, "Ivo", 30, "GBR");
+
+INSERT INTO teachers (id, name) VALUES (1, "Mr. Smith");
+INSERT INTO teachers (id, name) VALUES (2, "Mrs. Johnson");
+INSERT INTO teachers (id, name) VALUES (3, "Mr. Dimitrov");
+
+INSERT INTO classes (id, name, optional, teacher_id) VALUES (1, "Biology", 0, 1);
+INSERT INTO classes (id, name, optional, teacher_id) VALUES (2, "Physics", 1, 2);
+INSERT INTO classes (id, name, optional, teacher_id) VALUES (3, "Mathematics", 0, 3);
+
+INSERT INTO grades (student_id, class_id, grade) VALUES (1, 2, 3.00);
+INSERT INTO grades (student_id, class_id, grade) VALUES (1, 2, 5.00);
+INSERT INTO grades (student_id, class_id, grade) VALUES (2, 1, 4.00);
+INSERT INTO grades (student_id, class_id, grade) VALUES (2, 2, 5.00);
+INSERT INTO grades (student_id, class_id, grade) VALUES (3, 2, 5.00);
+INSERT INTO grades (student_id, class_id, grade) VALUES (3, 3, 6.00);

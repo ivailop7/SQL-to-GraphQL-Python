@@ -1,0 +1,45 @@
+// Some sample GraphQL queries to try out, if you start up the project locally
+
+// Get all students in the database
+{
+  getStudents {
+    id,
+    name,
+    age,
+    country
+  }
+}
+
+// 3 Queries at once
+{
+  studentsByName(name: "Ivo") {
+    id,
+    name,
+    age,
+    country
+  },
+  gradesByClass(name: "Mathematics") {
+    studentId,
+    grade
+  },
+ 	gradesByStudentAndClass(studentName: "Ivo", className: "Physics") {
+  	  grade
+  },  
+}
+
+// Adding a student
+mutation {
+  addStudent(input: {
+    id: 12,
+    name: "Jimmy",
+    age: 27,
+    country: "GBR"
+  }) {
+    student {
+      id,
+      name,
+      age
+    },
+    status
+  }
+}
