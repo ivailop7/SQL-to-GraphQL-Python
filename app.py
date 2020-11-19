@@ -10,7 +10,7 @@ app.add_url_rule("/", view_func=View.as_view("graphql", graphiql=True, schema=sc
 
 
 @app.teardown_appcontext
-def shutdown_session():
+def shutdown_session(Error=None):
     db_session.remove()
 
 
